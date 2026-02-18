@@ -1,15 +1,14 @@
-
 {
   "short_name": "Meu Deputado",
   "name": "Meu Deputado BA - Transparência",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/9285/9285324.png",
+      "src": "/icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/9285/9285324.png",
+      "src": "/icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
