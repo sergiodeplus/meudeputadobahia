@@ -16,6 +16,25 @@ export const DeputyProfile: React.FC<DeputyProfileProps> = ({ deputy, onClose })
     return 'text-green';
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: `Ficha de ${deputy.name}`,
+      text: `Confira a ficha do deputado ${deputy.name} (${deputy.party}) no app Meu Deputado BA.\n\nStatus: ${deputy.status.toUpperCase()}\nIntegridade: ${deputy.integrityScore}/10\n\n"${deputy.headline}"`,
+      url: window.location.href // Or a specific deep link if valid
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+        alert('Resumo copiado para a área de transferência!');
+      }
+    } catch (err) {
+      console.error('Erro ao compartilhar:', err);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center pointer-events-none">
       <div className="absolute inset-0 bg-ink/80 backdrop-blur-sm pointer-events-auto transition-opacity" onClick={onClose} />
@@ -149,7 +168,10 @@ export const DeputyProfile: React.FC<DeputyProfileProps> = ({ deputy, onClose })
           </div>
 
           {/* Action */}
-          <button className="w-full bg-ink text-paper font-mono uppercase font-bold text-sm py-4 flex items-center justify-center gap-2 hover:bg-ink/90 transition-colors">
+          <button
+            onClick={handleShare}
+            className="w-full bg-ink text-paper font-mono uppercase font-bold text-sm py-4 flex items-center justify-center gap-2 hover:bg-ink/90 transition-colors"
+          >
             <Share2 size={16} /> Compartilhar Ficha
           </button>
         </div>
